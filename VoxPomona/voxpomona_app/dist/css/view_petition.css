@@ -2,8 +2,6 @@
     box-sizing: border-box;
 }
 
-.manage-pet {
-}
 
 .header-panel {
     background-color: #009587;
@@ -35,6 +33,7 @@
     padding: 0;
     top: 200px;
     position: fixed;
+    width: 25%;
 }
 
 .menu, .menu * {
