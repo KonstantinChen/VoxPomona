@@ -192,6 +192,9 @@ body .container-fluid .jumbotron-danger {
   text-decoration: none;
   background: transparent;
 }
+.btn-no-padding {
+  padding: 8px 8px;
+}
 .btn::-moz-focus-inner,
 .input-group-btn .btn::-moz-focus-inner {
   border: 0;
@@ -1514,6 +1517,7 @@ output {
 }
 .form-control {
   height: 38px;
+  width: 800px;
   padding: 7px 0;
   font-size: 16px;
   line-height: 1.42857143;
