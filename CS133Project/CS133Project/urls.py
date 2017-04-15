@@ -15,8 +15,25 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+from django.contrib.auth.views import login, logout
+from signup import views as signup_views
+
+
 
 urlpatterns = [
 	url(r'^VoxPomona/', include('VoxPomona.urls')),
 	url(r'^admin/', admin.site.urls),
+	url(
+        regex=r'^login/$', 
+        view=login, 
+        kwargs={'template_name': 'login.html'}, 
+        name='login'
+    ),
+    url(
+        regex=r'^logout/$', 
+        view=logout, 
+        kwargs={'next_page': '/'}, 
+        name='logout'
+    ),
+    url(r'^signup/$', signup_views.signup, name='signup'),
 ]
