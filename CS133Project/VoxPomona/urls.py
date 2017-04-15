@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     #url(r'^profile', views.user_profile, name='user_profile'),
     #url(r'^logout', views.logout_view, name='logout_view'),
+    # Login/Logout URLs
 
 ]
