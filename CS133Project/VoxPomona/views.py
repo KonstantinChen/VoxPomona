@@ -13,10 +13,11 @@ def register_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+        	user = User.objects.create_user(form.cleaned_data.get('email'),
+                form.cleaned_data.get('email'), form.cleaned_data.get('password'))
+            user.first_name = form.cleaned_data.get('first_name')
+            user.last_name = form.cleaned_data.get('last_name')
+            user.save()
             login(request, user)
             return redirect('home')
     else:
