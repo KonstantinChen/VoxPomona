@@ -2,34 +2,42 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <div id="content-container" class="container p-none">
-        <div class="lgn-container col-lg-8">
-            <form id="login-form" method="post" 
-                action="{% url 'login' %}">
-                {% csrf_token %}
-                <table class="table">
-                    <tr>
-                        <td><label for="id_username">Username</label></td>
-                        <td><input id="id_username" name="username" 
-                                   type="text" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_password">Password</label></td>
-                        <td><input id="id_password" name="password" 
-                                   type="password" class="form-control"></td>
-                    </tr>
-                </table>
-                {% if form.errors %}
-                    <p class=" label label-danger">
-                        Your username and password didn't match. 
-                        Please try again.
-                    </p>
-                {% endif %}
+    <div id="content-container" class ="well">
+        <form id="login-form" method="post" action="{% url 'login' %}" class="form-horizontal">
+            <fieldset>
+            <h1>Login</h1>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username" class="col-md-2 control-label">Email</label>
+                <div class="col-md-10">
+                    <input type="email" class="form-control" id="id_username" placeholder="Email" name="username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_password" class="col-md-2 control-label">Password</label>
 
-                <input type="submit" value="Login" 
-                       class="btn btn-primary pull-right" />
-                <input type="hidden" name="next" value="{{ next }}" />
-            </form>
-        </div>
+                <div class="col-md-10">
+                    <input type="password" class="form-control" id="id_password" placeholder="Password" name="password">
+                </div>
+            </div>
+
+
+            <input type="submit" value="Login" 
+                   class="btn btn-primary pull-right" />
+            <input type="hidden" name="next" value="{{ next }}" />
+
+            {% if form.errors %}
+                <br /> <br /><br />
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Username and password do not match.</h3>
+                    </div>
+                    <div class="panel-body">
+                        Please try again.
+                    </div>
+                </div>
+            {% endif %}
+            </fieldset>
+        </form>
     </div>
 {% endblock content %}
