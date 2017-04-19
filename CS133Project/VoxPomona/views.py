@@ -29,3 +29,7 @@ def logout_view(request):
     logout(request)
     # Redirect to a success page.
     return redirect('login')
+
+@login_required
+def user_profile(request):
+    return render(request, 'profile.html', user_profile_dict(request.user))
