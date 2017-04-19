@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{% csrf_token %}
+
+
+<div id=0>
+<div style='height: 25px'> </div>
+<h2>Your Information</h2><div class='section_edit'><a href='/edit-information/'>Edit</a></div>
+<hr>
+<ul class='normal'>
+	<li> Name: {{user.user_info.display_name}}
+	</li>
+	<li> Email: {{user}}
+	</li>
+	<li> Member since {{user.date_joined}}
+	</li>
+</ul>
+</div>
+
+{% endblock %}
