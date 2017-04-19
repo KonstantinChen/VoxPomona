@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import User, Petition, Clause, Change, Comment, Sign, ChangeVote, CommentVote
+from .models import UserInfo, Petition, Clause, Change, Comment, Sign, ChangeVote, CommentVote
 
 # Register your models here.
-admin.site.register(User)
+admin.site.register(UserInfo)
 admin.site.register(Petition)
 admin.site.register(Clause)
 admin.site.register(Change)
