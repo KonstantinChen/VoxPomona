@@ -3,24 +3,23 @@ from __future__ import unicode_literals
 from django.db import models
 from django import forms
 from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 
 # plan to use Django user
 # plan to use Django permission
-class User(models.Model):
+class UserInfo(models.Model):
     email = models.EmailField(max_length = 100, unique = True)
     name = models.CharField(max_length = 100)
     USER_TYPE = (('STU','Student'), ('STA','Staff'),('FAC','Faculty'))
     user_type = models.CharField(max_length = 3, choices = USER_TYPE, default = 'STU')
-    pswd = models.CharField(max_length = 128)
-
-    
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
 
 
 class Petition(models.Model):
 
-	userID = models.ForeignKey(User, to_field = 'email', on_delete=models.CASCADE)
+	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
 	# petitionID
 	petitionID = models.IntegerField()
 
@@ -62,28 +61,28 @@ class Clause(models.Model):
 	time = models.DateTimeField(auto_now_add=True) #what does the bool do?!
 
 class Change(models.Model):
-	userID = models.ForeignKey(User, to_field = 'email', on_delete=models.CASCADE)
+	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
 	chid = models.IntegerField()
 	content = models.TextField()
 	decision = models.IntegerField() #limit this to 1, 2, 3
 
 class Comment(models.Model):
-	userID = models.ForeignKey(User, to_field = 'email', on_delete=models.CASCADE)
+	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
 	cid = models.IntegerField()
 	content = models.TextField()
 
 class Sign(models.Model):
-	userID = models.ForeignKey(User, to_field = 'email', on_delete=models.CASCADE)
+	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
 	petitionID = models.ForeignKey(Petition) #on-delete???
 	time = models.DateTimeField()
 
 class ChangeVote(models.Model):
-	userID = models.ForeignKey(User, to_field = 'email', on_delete=models.CASCADE)
+	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
 	chid = models.ForeignKey(Change, on_delete=models.CASCADE)
 	vote = models.BooleanField()
 
 class CommentVote(models.Model):
-	userID = models.ForeignKey(User, to_field = 'email', on_delete=models.CASCADE)
+	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
 	cid = models.ForeignKey(Comment, on_delete=models.CASCADE)
 	vote = models.BooleanField()
 
