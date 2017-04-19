@@ -16,12 +16,15 @@ class UserInfo(models.Model):
     user_type = models.CharField(max_length = 3, choices = USER_TYPE, default = 'STU')
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
 
+    def __unicode__(self):
+    	return self.email
+
 
 class Petition(models.Model):
 
 	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
 	# petitionID
-	petitionID = models.IntegerField()
+	petitionID = models.AutoField(primary_key = True)
 
 	# category
 	ACADEMICS = 'AC'
@@ -48,10 +51,16 @@ class Petition(models.Model):
 	# threshold: say > 5 for now
 	threshold = models.IntegerField()
 	# permissions
-	# stu_permission = models.ManyToManyField('Permission')
-	# staff_permission = models.ManyToManyField('Permission')
-	# faculty_permission = models.ManyToManyField('Permission')
+	PERM_CHOICES = (('1','view'),('2','view, sign'),('3','view, sign, comment'), 
+		('4','view, sign, comment, propose changes'),
+		('5','view, sign, comment, propose changes, modify'))
+	stu_permission = models.CharField(max_length = 1, choices = PERM_CHOICES, default = 3)
+	staff_permission = models.CharField(max_length = 1, choices = PERM_CHOICES, default = 3)
+	faculty_permission = models.CharField(max_length = 1, choices = PERM_CHOICES, default = 3)
 	finalized = models.BooleanField()
+
+	def __unicode__(self):
+		return ("petition"+str(self.petitionID))
 
 class Clause(models.Model):
 	petitionID = models.ForeignKey(Petition, on_delete=models.CASCADE)
@@ -60,16 +69,23 @@ class Clause(models.Model):
 	content = models.TextField()
 	time = models.DateTimeField(auto_now_add=True) #what does the bool do?!
 
+	def __unicode__(self):
+		return ("petition"+str(self.petitionID)+" clause"+index)
+
 class Change(models.Model):
 	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
-	chid = models.IntegerField()
+	chid = models.AutoField(primary_key = True)
 	content = models.TextField()
 	decision = models.IntegerField() #limit this to 1, 2, 3
+	def __unicode__(self):
+		return ("change"+str(self.chid))
 
 class Comment(models.Model):
 	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
-	cid = models.IntegerField()
+	cid = models.AutoField(primary_key = True)
 	content = models.TextField()
+	def __unicode__(self):
+		return ("comment"+str(self.cid))
 
 class Sign(models.Model):
 	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
