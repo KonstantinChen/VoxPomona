@@ -32,4 +32,4 @@ def logout_view(request):
 
 @login_required
 def user_profile(request):
-    return render(request, 'profile.html', user_profile_dict(request.user))
+    return render(request, 'profile.html')
