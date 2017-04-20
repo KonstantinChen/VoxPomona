@@ -9,7 +9,6 @@
     width: 100%;
     top: 8px;
     left: 8px;
-    right: 8px;
     position: fixed;
     z-index: 3;
 }
@@ -31,9 +30,9 @@
 .menu {
     overflow: auto;
     padding: 0;
-    top: 200px;
+    top: 225px;
     position: fixed;
-    width: 25%;
+    width: 22.5%;
 }
 
 .menu, .menu * {
@@ -68,11 +67,12 @@
 .pages {
     position: absolute;
     top: 0;
-    right: 50px;
+    right: 15px;
     z-index: 4;
-    padding: 0;
+    padding: 15px;
+    padding-top: 156px;
     overflow: auto;
-    width: 70%;
+    width: 75%;
 }
 
 .pages-center {

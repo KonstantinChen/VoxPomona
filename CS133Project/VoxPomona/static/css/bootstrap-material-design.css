@@ -1517,7 +1517,6 @@ output {
 }
 .form-control {
   height: 38px;
-  width: 800px;
   padding: 7px 0;
   font-size: 16px;
   line-height: 1.42857143;
@@ -2192,7 +2191,6 @@ legend {
   display: inline-block;
   width: -webkit-calc(100% - 92px);
   width: calc(100% - 92px);
-  min-height: 66px;
 }
 .list-group .list-group-item .row-content .action-secondary {
   position: absolute;
