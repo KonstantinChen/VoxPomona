@@ -64,10 +64,12 @@ def new_petition_view(request):
     if request.method == 'POST':
         form = NewPetitionForm(request.POST)
         if form.is_valid():
+            #Create New Form
+            petition = Petition()
             
             return redirect('/VoxPomona/home')
         else:
             return render(request, 'new_petition.html', {'form': form})
     else:
-        form = SignUpForm()
+        form = NewPetitionForm()
         return render(request, 'new_petition.html', {'form': form})

@@ -57,9 +57,15 @@ class Petition(models.Model):
     # close time: no later than open_time
     close_time = models.DateField()
     # threshold: say > 5 for now
+<<<<<<< HEAD
     threshold = models.IntegerField(default = 10)
     title = models.CharField(max_length = 50, default = "New Petition")
     summary = models.CharField(max_length = 500, default = "A Petition")
+=======
+    threshold = models.IntegerField()
+    title = models.CharField(max_length = 50, default = "")
+    summary = models.CharField(max_length = 500, default = "")
+>>>>>>> 6dfadfbeda260938988a7a5d6d976b1d686a20ab
     # permissions
     PERM_CHOICES = (('1','view'),('2','view, sign'),('3','view, sign, comment'), 
         ('4','view, sign, comment, propose changes'),
