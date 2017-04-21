@@ -30,7 +30,7 @@ class UserInfo(models.Model):
 
 class Petition(models.Model):
 
-    userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
+    userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete = models.CASCADE)
     # petitionID
     petitionID = models.AutoField(primary_key = True)
 
@@ -56,8 +56,8 @@ class Petition(models.Model):
     open_time = models.DateField()
     # close time: no later than open_time
     close_time = models.DateField()
-    # threshold: say > 5 for now
-    threshold = models.IntegerField(default = 10)
+    # threshold: say = 10 for now
+    threshold = 10
     title = models.CharField(max_length = 50, default = "New Petition")
     summary = models.CharField(max_length = 500, default = "A Petition")
     # permissions
@@ -90,7 +90,7 @@ class Clause(models.Model):
 
 class Change(models.Model):
     userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
-    clause = models.ForeignKey(Clause, on_delete=models.CASCADE, default = 1)
+    clause = models.ForeignKey(Clause, on_delete=models.CASCADE)
     chid = models.AutoField(primary_key = True)
     content = models.TextField()
     decision = models.IntegerField() #limit this to 1, 2, 3
@@ -101,7 +101,7 @@ class Change(models.Model):
 
 class Comment(models.Model):
     userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
-    clause = models.ForeignKey(Clause, on_delete=models.CASCADE, default = 1)
+    clause = models.ForeignKey(Clause, on_delete=models.CASCADE)
     cid = models.AutoField(primary_key = True)
     content = models.TextField()
     def __unicode__(self):
