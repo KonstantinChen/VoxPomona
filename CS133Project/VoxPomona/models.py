@@ -90,7 +90,7 @@ class Clause(models.Model):
 
 class Change(models.Model):
     userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
-    clause = models.ForeignKey(Clause, on_delete=models.CASCADE, default = 1)
+    clause = models.ForeignKey(Clause, on_delete=models.CASCADE)
     chid = models.AutoField(primary_key = True)
     content = models.TextField()
     decision = models.IntegerField() #limit this to 1, 2, 3
@@ -101,7 +101,7 @@ class Change(models.Model):
 
 class Comment(models.Model):
     userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
-    clause = models.ForeignKey(Clause, on_delete=models.CASCADE, default = 1)
+    clause = models.ForeignKey(Clause, on_delete=models.CASCADE)
     cid = models.AutoField(primary_key = True)
     content = models.TextField()
     def __unicode__(self):
