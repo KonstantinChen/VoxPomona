@@ -57,9 +57,9 @@ class Petition(models.Model):
     # close time: no later than open_time
     close_time = models.DateField()
     # threshold: say > 5 for now
-    threshold = models.IntegerField()
-    title = models.CharField(max_length = 50, default = "")
-    summary = models.CharField(max_length = 500, default = "")
+    threshold = models.IntegerField(default = 10)
+    title = models.CharField(max_length = 50, default = "New Petition")
+    summary = models.CharField(max_length = 500, default = "A Petition")
     # permissions
     PERM_CHOICES = (('1','view'),('2','view, sign'),('3','view, sign, comment'), 
         ('4','view, sign, comment, propose changes'),
@@ -79,23 +79,35 @@ class Clause(models.Model):
     content = models.TextField()
     time = models.DateTimeField(auto_now_add=True) #what does the bool do?!
 
+    # might not work
+    key = (petitionID,index)
+
     def __unicode__(self):
-        return ("petition"+str(self.petitionID)+" clause"+index)
+        return (str(self.petitionID)+" clause"+str(self.index))
+
+    class Meta:
+        unique_together = ("petitionID","index")
 
 class Change(models.Model):
     userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
+    clause = models.ForeignKey(Clause, on_delete=models.CASCADE, default = 1)
     chid = models.AutoField(primary_key = True)
     content = models.TextField()
     decision = models.IntegerField() #limit this to 1, 2, 3
     def __unicode__(self):
         return ("change"+str(self.chid))
+    class Meta:
+        unique_together = ("userID","clause")
 
 class Comment(models.Model):
     userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
+    clause = models.ForeignKey(Clause, on_delete=models.CASCADE, default = 1)
     cid = models.AutoField(primary_key = True)
     content = models.TextField()
     def __unicode__(self):
         return ("comment"+str(self.cid))
+    class Meta:
+        unique_together = ("userID","clause")
 
 class Sign(models.Model):
     userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
