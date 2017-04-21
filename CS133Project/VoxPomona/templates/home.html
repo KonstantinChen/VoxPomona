@@ -6,7 +6,7 @@
 
 <nav class="col-xs-3 menu">
   <ul>
-    <li class="active withripple"> <div class="list-group">
+    <a href="/VoxPomona/profile"><li class="withripple"> <div class="list-group">
           <div class="list-group-item">
             <div class="row-action-primary">
               <i class="material-icons">person</i>
@@ -15,8 +15,9 @@
               <h4 class="list-group-item-heading ">{{user.first_name}} {{user.last_name}}</h4>
             </div>
           </div>
-        </div> </li>
-    <a href="/VoxPomona/home"><li class="withripple" data-target="#about">Go back</li></a>
+        </div> </li></a>
+    <li> <a href="javascript:void(0)" class="btn btn-raised btn-primary">Start a new petition</a> </li>
+    <li class="withripple">Search Petitions</li>
     <li></li>
     <a href="/VoxPomona/logout/"><li class="withripple">Logout</li></a>
   </ul>
@@ -25,6 +26,37 @@
 <div class="pages col-xs-9">
 	<div class ="well">
     <h1>My Petitions</h1>
+    <p><em>Petitions that you started</em></p>
+    <p>Petitions go here...</p>
+    <div class="list-group">
+      <!-- use once we figure out appropriate django syntax
+        <div class="list-group-item">
+          <div class="row-action-primary">
+            <i class="material-icons">icon based on type</i>
+          </div>
+          <div class="row-content">
+            <h4 class="list-group-item-heading "> title of petition </h4>
+            </div>
+        </div>
+      -->
+    </div>
+  </div>
+  <div class ="well">
+    <h1>Petitions I'm Following</h1>
+    <p><em>Petitions you've signed, commented on, or proposed changes to</em></p>
+    <p>Petitions go here...</p>
+    <div class="list-group">
+      <!-- use once we figure out appropriate django syntax
+        <div class="list-group-item">
+          <div class="row-action-primary">
+            <i class="material-icons">icon based on type</i>
+          </div>
+          <div class="row-content">
+            <h4 class="list-group-item-heading "> title of petition </h4>
+            </div>
+        </div>
+      -->
+    </div>
   </div>
 </div>
 

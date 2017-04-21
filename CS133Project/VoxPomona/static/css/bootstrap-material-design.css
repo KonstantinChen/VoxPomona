@@ -125,6 +125,7 @@ body .container-fluid .well p,
 body .container .jumbotron p,
 body .container-fluid .jumbotron p {
   font-weight: 300;
+  font-size: 16px;
 }
 body .container .well,
 body .container-fluid .well,
