@@ -59,7 +59,8 @@ def user_profile(request):
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    my_petitions = get_user_petitions(request)
+    return render(request, 'home.html', my_petitions)
 
 @login_required
 #Start a New Petition
@@ -87,8 +88,6 @@ def new_petition_view(request):
             petition.threshold = 10
 
             petition.save()
-
-            return HttpResponse(petition.summary)
             
             return redirect('/VoxPomona/home')
         else:
@@ -96,3 +95,16 @@ def new_petition_view(request):
     else:
         form = NewPetitionForm()
         return render(request, 'new_petition.html', {'form': form})
+
+@login_required
+#Grab Petitions
+def get_user_petitions(request):
+    user_info = request.user.UserInfo
+    petitionL = Petition.objects.filter(userID=user_info.email)
+
+    petIDList = []
+    for x in range(0,len(petIDList)):
+        petIDList[x] = petitionL[x]
+
+    petDict = dict(zip(petIDList,petitionL))
+    return petDict
