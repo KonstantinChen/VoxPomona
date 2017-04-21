@@ -88,16 +88,22 @@ class Sign(models.Model):
 	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
 	petitionID = models.ForeignKey(Petition) #on-delete???
 	time = models.DateTimeField()
+	class Meta:
+		unique_together = ("userID","petitionID")
 
 class ChangeVote(models.Model):
 	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
 	chid = models.ForeignKey(Change, on_delete=models.CASCADE)
 	vote = models.BooleanField()
+	class Meta:
+		unique_together = ("userID","chid")
 
 class CommentVote(models.Model):
 	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
 	cid = models.ForeignKey(Comment, on_delete=models.CASCADE)
 	vote = models.BooleanField()
+	class Meta:
+		unique_together = ("userID","cid")
 
 
 
