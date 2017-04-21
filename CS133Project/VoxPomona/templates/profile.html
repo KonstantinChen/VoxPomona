@@ -26,11 +26,11 @@
 	<div class ="well">
         <h1>Your Information</h1><div class='section_edit'><a href='/edit-information/'>Edit</a></div>
         <ul>
-			<li> Name: {{user.first_name}} {{user.last_name}}
+			<li> Name: {{user.UserInfo.name}}
 			</li>
 			<li> Email: {{user.email}}
 			</li>
-			<li> User type: {{user.user_info.user_type}}
+			<li> User type: {{user.UserInfo.get_user_type}}
 			</li>
 			<li> Member since {{user.date_joined}}
 			</li>
