@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
+#Importing datetime Probably want to delete this later ----------------
+import datetime
+
 from VoxPomona.forms import *
 from VoxPomona.models import *
 
@@ -64,8 +67,28 @@ def new_petition_view(request):
     if request.method == 'POST':
         form = NewPetitionForm(request.POST)
         if form.is_valid():
+            #Grab this user's info
+
+            user_info = request.user.UserInfo
             #Create New Form
             petition = Petition()
+            petition.userID = user_info
+            petition.title = form.cleaned_data.get('title')
+            petition.summary = form.cleaned_data.get('summary')
+            petition.category = form.cleaned_data.get('category')
+            petition.stu_permission = form.cleaned_data.get('stu_permission')
+            petition.staff_permission = form.cleaned_data.get('staff_permission')
+            petition.faculty_permission = form.cleaned_data.get('faculty_permission')
+            petition.finalized = False #By default, the petition is not final
+
+            #Need to Change these Default Values
+            petition.open_time = datetime.datetime.now()
+            petition.close_time = datetime.datetime.now()
+            petition.threshold = 10000
+
+            petition.save()
+
+            return HttpResponse(petition.summary)
             
             return redirect('/VoxPomona/home')
         else:
