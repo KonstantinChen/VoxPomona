@@ -2,6 +2,7 @@
 {% block title %}Signup{% endblock %}
 
 {% block content %}
+<div class="pages col-xs-9">
     <div id="content-container" class ="well">
         <form id="login-form" method="post" action="{% url 'register' %}" class="form-horizontal">
             <fieldset>
@@ -46,4 +47,5 @@
             </div>
         </div>
     {% endif %}
+</div>
 {% endblock content %}
