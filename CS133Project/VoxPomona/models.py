@@ -16,6 +16,9 @@ class UserInfo(models.Model):
     user_type = models.CharField(max_length = 3, choices = USER_TYPE, default = 'STU')
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
 
+    def get_user_type(self):
+    	return self.user_type
+
 
 class Petition(models.Model):
 
