@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from VoxPomona.models import UserInfo
+from VoxPomona.models import *
 
 
 class SignUpForm(forms.ModelForm):
@@ -47,3 +47,26 @@ class SignUpForm(forms.ModelForm):
         self.fields['password'].widget.attrs.update({'placeholder' : 'Password'})
         self.fields['password'].label = ''
 
+class NewPetitionForm(forms.ModelForm):
+
+    class Meta:
+        model = Petition
+        fields = ('email', 'name', 'user_type')
+
+    def __init__(self, *args, **kwargs):
+        super(SignUpForm, self).__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['email'].widget.attrs.update({'placeholder' : 'Email'})
+        self.fields['email'].label = ''
+
+        self.fields['name'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['name'].widget.attrs.update({'placeholder' : 'Full name'})
+        self.fields['name'].label = ''
+
+        self.fields['user_type'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['user_type'].label = 'User type'
+        self.fields['user_type'].help_text = 'Click to select your user type'
+
+        self.fields['password'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['password'].widget.attrs.update({'placeholder' : 'Password'})
+        self.fields['password'].label = ''
