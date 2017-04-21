@@ -127,5 +127,5 @@ STATICFILES_DIRS = (
     )
 
 # Login settings
-LOGIN_URL = '/login'
+LOGIN_URL = '/VoxPomona/login'
 LOGIN_REDIRECT_URL = '/VoxPomona/profile'
