@@ -14,7 +14,7 @@ class UserInfo(models.Model):
     name = models.CharField(max_length = 100)
     USER_TYPE = (('STU','Student'), ('STA','Staff'),('FAC','Faculty'))
     user_type = models.CharField(max_length = 3, choices = USER_TYPE, default = 'STU')
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name = "UserInfo", on_delete = models.CASCADE)
 
     def get_user_type(self):
     	return self.user_type
@@ -50,6 +50,8 @@ class Petition(models.Model):
 	close_time = models.DateField()
 	# threshold: say > 5 for now
 	threshold = models.IntegerField()
+	title = models.CharField(max_length = 50)
+	summary = models.CharField(max_length = 500)
 	# permissions
 	PERM_CHOICES = (('1','view'),('2','view, sign'),('3','view, sign, comment'), 
 		('4','view, sign, comment, propose changes'),
