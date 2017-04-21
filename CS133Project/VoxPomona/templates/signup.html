@@ -2,7 +2,7 @@
 {% block title %}Signup{% endblock %}
 
 {% block content %}
-  <p></p>
+<div class="pages col-xs-9">
   <h2>Sign up</h2>
   <form method="post">
     {% csrf_token %}
@@ -20,4 +20,5 @@
     {% endfor %}
     <button type="submit">Sign up</button>
   </form>
+</div>
 {% endblock %}
