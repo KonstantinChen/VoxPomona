@@ -51,9 +51,26 @@ class NewPetitionForm(forms.ModelForm):
 
     class Meta:
         model = Petition
-        fields = ('title',)
+        fields = ('title','summary','stu_permission','staff_permission','faculty_permission')
 
     def __init__(self, *args, **kwargs):
         super(NewPetitionForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget.attrs.update({'class' : 'form-control'})
-        self.fields['title'].widget.attrs.update({'placeholder': 'Title'})
+        self.fields['title'].label = 'Petition Title'
+        self.fields['title'].help_text = 'Give your petition a descriptive title.'
+
+        self.fields['summary'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['summary'].label = 'Petition Summary'
+        self.fields['summary'].help_text = 'Summarize your petition - why should people sign it?'
+
+        self.fields['stu_permission'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['stu_permission'].label = ''
+        self.fields['stu_permission'].help_text = 'Student users can...'
+
+        self.fields['staff_permission'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['staff_permission'].label = ''
+        self.fields['staff_permission'].help_text = 'Staff users can...'
+
+        self.fields['faculty_permission'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['faculty_permission'].label = ''
+        self.fields['faculty_permission'].help_text = 'Faculty users can...'
