@@ -17,7 +17,13 @@ class UserInfo(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name = "UserInfo", on_delete = models.CASCADE)
 
     def get_user_type(self):
-    	return self.USER_TYPE[self.user_type]
+    	ty = self.user_type
+    	if ty == "STU":
+    		return "Student"
+    	elif ty == "STA":
+    		return "Staff"
+    	else:
+    		return "Faculty"
 
 
 class Petition(models.Model):
