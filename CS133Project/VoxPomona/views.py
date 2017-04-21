@@ -69,5 +69,5 @@ def new_petition_view(request):
         else:
             return render(request, 'new_petition.html', {'form': form})
     else:
-        form = SignUpForm()
+        form = NewPetitionForm()
         return render(request, 'new_petition.html', {'form': form})

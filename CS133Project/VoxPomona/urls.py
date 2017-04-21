@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^$', views.user_profile, name='user_profile'),
     url(r'^profile', views.user_profile, name='user_profile'),
     url(r'^home', views.home, name='home'),
+    url(r'^new_petition', views.new_petition_view, name='new_petition')
 ]
