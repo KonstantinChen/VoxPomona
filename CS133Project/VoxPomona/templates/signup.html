@@ -3,12 +3,14 @@
 
 {% block content %}
 <div class="pages col-xs-9">
-  <h2>Sign up</h2>
+  <div class="well">
+  <h1>Sign up</h1>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
+        {% if field.label_tag.length > 0 %}
+          <br> {{ field.label_tag }}
+        {% endif %}
         {{ field }}
         {% if field.help_text %}
           <small style="color: grey">{{ field.help_text }}</small>
@@ -16,9 +18,9 @@
         {% for error in field.errors %}
           <p style="color: red">{{ error }}</p>
         {% endfor %}
-      </p>
     {% endfor %}
-    <button type="submit">Sign up</button>
+    <button class="btn" type="submit">Sign up</button>
   </form>
+  </div>
 </div>
 {% endblock %}
