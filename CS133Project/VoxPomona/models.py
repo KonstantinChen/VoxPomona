@@ -16,6 +16,9 @@ class UserInfo(models.Model):
     user_type = models.CharField(max_length = 3, choices = USER_TYPE, default = 'STU')
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
 
+    def get_user_type(self):
+    	return self.user_type
+
 
 class Petition(models.Model):
 
@@ -88,16 +91,22 @@ class Sign(models.Model):
 	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
 	petitionID = models.ForeignKey(Petition) #on-delete???
 	time = models.DateTimeField()
+	class Meta:
+		unique_together = ("userID","petitionID")
 
 class ChangeVote(models.Model):
 	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
 	chid = models.ForeignKey(Change, on_delete=models.CASCADE)
 	vote = models.BooleanField()
+	class Meta:
+		unique_together = ("userID","chid")
 
 class CommentVote(models.Model):
 	userID = models.ForeignKey(UserInfo, to_field = 'email', on_delete=models.CASCADE)
 	cid = models.ForeignKey(Comment, on_delete=models.CASCADE)
 	vote = models.BooleanField()
+	class Meta:
+		unique_together = ("userID","cid")
 
 
 

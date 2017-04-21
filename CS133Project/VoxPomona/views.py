@@ -38,6 +38,7 @@ def register_view(request):
             user_info.user = user
             user_info.save()
 
+
             # redirect to the profile page:
             user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))
             if user is not None:
