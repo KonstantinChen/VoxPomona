@@ -20,14 +20,6 @@ def register_view(request):
             # User default
             user = User.objects.create_user(form.cleaned_data.get('email'),
                 form.cleaned_data.get('email'), form.cleaned_data.get('password'))
-            name = form.cleaned_data.get('name')
-            nameL = name.split()
-            if (len(nameL) < 2):
-                user.first_name = "failed"
-                user.last_name = "name_creation"
-            else:
-                user.first_name = nameL[0]
-                user.last_name = nameL[1]
             user.save()
 
             #Create UserInfo to retain other info
