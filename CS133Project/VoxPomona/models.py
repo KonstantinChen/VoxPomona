@@ -25,6 +25,8 @@ class UserInfo(models.Model):
     	else:
     		return "Faculty"
 
+    def __unicode__(self):
+		return (self.email)
 
 class Petition(models.Model):
 
