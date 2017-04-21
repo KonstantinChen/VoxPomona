@@ -51,7 +51,7 @@ class NewPetitionForm(forms.ModelForm):
 
     class Meta:
         model = Petition
-        fields = ('title','summary','stu_permission','staff_permission','faculty_permission')
+        fields = ('title','summary','category','stu_permission','staff_permission','faculty_permission')
 
     def __init__(self, *args, **kwargs):
         super(NewPetitionForm, self).__init__(*args, **kwargs)
@@ -62,6 +62,10 @@ class NewPetitionForm(forms.ModelForm):
         self.fields['summary'].widget.attrs.update({'class' : 'form-control'})
         self.fields['summary'].label = 'Petition Summary'
         self.fields['summary'].help_text = 'Summarize your petition - why should people sign it?'
+
+        self.fields['category'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['category'].label = 'Petition Category'
+        self.fields['category'].help_text = 'Select which category your petition best fits under'
 
         self.fields['stu_permission'].widget.attrs.update({'class' : 'form-control'})
         self.fields['stu_permission'].label = ''
