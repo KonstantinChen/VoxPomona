@@ -27,6 +27,8 @@ class UserInfo(models.Model):
 
     def __unicode__(self):
         return (self.email)
+    def __str__(self):
+        return (self.email)
 
 class Petition(models.Model):
 
@@ -71,6 +73,8 @@ class Petition(models.Model):
 
     def __unicode__(self):
         return ("petition"+str(self.petitionID))
+    def __str__(self):
+        return ("petition"+str(self.petitionID))
 
 class Clause(models.Model):
     petitionID = models.ForeignKey(Petition, on_delete=models.CASCADE)
@@ -84,6 +88,8 @@ class Clause(models.Model):
 
     def __unicode__(self):
         return (str(self.petitionID)+" clause"+str(self.index))
+    def __str__(self):
+        return (str(self.petitionID)+" clause"+str(self.index))
 
     class Meta:
         unique_together = ("petitionID","index")
@@ -96,6 +102,8 @@ class Change(models.Model):
     decision = models.IntegerField() #limit this to 1, 2, 3
     def __unicode__(self):
         return ("change"+str(self.chid))
+    def __str__(self):
+        return ("change"+str(self.chid))
     class Meta:
         unique_together = ("userID","clause")
 
@@ -105,6 +113,8 @@ class Comment(models.Model):
     cid = models.AutoField(primary_key = True)
     content = models.TextField()
     def __unicode__(self):
+        return ("comment"+str(self.cid))
+    def __str__(self):
         return ("comment"+str(self.cid))
     class Meta:
         unique_together = ("userID","clause")
