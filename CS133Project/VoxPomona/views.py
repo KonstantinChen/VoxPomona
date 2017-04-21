@@ -84,7 +84,7 @@ def new_petition_view(request):
             #Need to Change these Default Values
             petition.open_time = datetime.datetime.now()
             petition.close_time = datetime.datetime.now()
-            petition.threshold = 10000
+            petition.threshold = 10
 
             petition.save()
 
