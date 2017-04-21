@@ -41,7 +41,7 @@ class SignUpForm(forms.ModelForm):
 
         self.fields['user_type'].widget.attrs.update({'class' : 'form-control'})
         self.fields['user_type'].label = 'User type'
-        self.fields['user_type'].help_text = 'Select your user type'
+        self.fields['user_type'].help_text = 'Click to select your user type'
 
         self.fields['password'].widget.attrs.update({'class' : 'form-control'})
         self.fields['password'].widget.attrs.update({'placeholder' : 'Password'})
