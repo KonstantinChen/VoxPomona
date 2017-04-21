@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block title %}Signup{% endblock %}
+{% block title %}Start A New Petition{% endblock %}
 
 {% block content %}
 <div class="pages col-xs-9">
   <div class="well">
-  <h1>Sign up</h1>
+  <h1>Start A New Petition</h1>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}

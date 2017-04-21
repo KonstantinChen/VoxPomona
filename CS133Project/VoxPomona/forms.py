@@ -48,25 +48,11 @@ class SignUpForm(forms.ModelForm):
         self.fields['password'].label = ''
 
 class NewPetitionForm(forms.ModelForm):
+    password = forms.CharField(label='password', max_length=128, widget=forms.PasswordInput)
 
     class Meta:
         model = Petition
-        fields = ('email', 'name', 'user_type')
+        fields = ('title',)
 
     def __init__(self, *args, **kwargs):
-        super(SignUpForm, self).__init__(*args, **kwargs)
-        self.fields['email'].widget.attrs.update({'class' : 'form-control'})
-        self.fields['email'].widget.attrs.update({'placeholder' : 'Email'})
-        self.fields['email'].label = ''
-
-        self.fields['name'].widget.attrs.update({'class' : 'form-control'})
-        self.fields['name'].widget.attrs.update({'placeholder' : 'Full name'})
-        self.fields['name'].label = ''
-
-        self.fields['user_type'].widget.attrs.update({'class' : 'form-control'})
-        self.fields['user_type'].label = 'User type'
-        self.fields['user_type'].help_text = 'Click to select your user type'
-
-        self.fields['password'].widget.attrs.update({'class' : 'form-control'})
-        self.fields['password'].widget.attrs.update({'placeholder' : 'Password'})
-        self.fields['password'].label = ''
+        super(NewPetitionForm, self).__init__(*args, **kwargs)

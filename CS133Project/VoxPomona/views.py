@@ -57,3 +57,17 @@ def user_profile(request):
 @login_required
 def home(request):
     return render(request, 'home.html')
+
+@login_required
+#Start a New Petition
+def new_petition_view(request):
+    if request.method == 'POST':
+        form = NewPetitionForm(request.POST)
+        if form.is_valid():
+            
+            return redirect('/VoxPomona/home')
+        else:
+            return render(request, 'new_petition.html', {'form': form})
+    else:
+        form = SignUpForm()
+        return render(request, 'new_petition.html', {'form': form})
