@@ -1,8 +1,12 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+
+from VoxPomona.forms import *
+from VoxPomona.models import *
 
 # Create your views here.
 def index(request):
@@ -11,17 +15,32 @@ def index(request):
 #User Registration
 def register_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
+            # User default
+            user = User.objects.create_user(form.cleaned_data.get('email'),
+                form.cleaned_data.get('email'), form.cleaned_data.get('password'))
+            user.save()
+
+            #Create UserInfo to retain other info
+            user_info = UserInfo()
+            user_info.email = form.cleaned_data.get('email')
+            user_info.name = form.cleaned_data.get('name')
+            user_info.user_type = form.cleaned_data.get('user_type')
+            user_info.user = user
+            user_info.save()
+
+            # redirect to the profile page:
+            user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+            return redirect('/VoxPomona/profile')
+        else:
+            return render(request, 'signup.html', {'form': form})
     else:
-        form = UserCreationForm()
-    return render(request, 'signup.html', {'form': form})
+        form = SignUpForm()
+        return render(request, 'signup.html', {'form': form})
 
 #Logout Out: Simply logs out user and redirects to login
 @login_required
